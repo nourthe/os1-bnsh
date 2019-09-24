@@ -1,5 +1,6 @@
-#include <string.h>
-#include <stdlib.h>
+#include<stdio.h> //delete this.
+#include<string.h>
+#include<stdlib.h>
 
 #include "builtin.h"
 
@@ -20,6 +21,7 @@ int get_func_argument_count(enum builtin_func func){
 			//TODO error notice
 			break;
 	}
+	return -1; // Not found
 }
 enum builtin_func find_builtin_function(char* func_string){
 	for (int i = 0; i < FUNC_MAX; i++){
@@ -37,8 +39,11 @@ void exec_func(enum builtin_func func, int argc, char* argv[]){
 		switch(func){
 			case CD:
 				//TODO CHANGE DIRECTORY
+				printf("to-do: do change directory.");
+				//
 				break;
 			case EXIT:
+				printf("Exit by exit.");
 				exit(EXIT_SUCCESS);
 				break;
 			default:
