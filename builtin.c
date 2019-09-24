@@ -35,15 +35,15 @@ enum builtin_func find_builtin_function(char* func_string){
 
 void exec_func(enum builtin_func func, int argc, char* argv[]){
 	int func_arg_count = get_func_argument_count(func);
-	if(func_arg_count == argc){
+	if(func_arg_count == (argc - 1)){
 		switch(func){
 			case CD:
 				//TODO CHANGE DIRECTORY
-				printf("to-do: do change directory.");
+				printf("to-do: do change directory to: %s.\n", argv[1]);
 				//
 				break;
 			case EXIT:
-				printf("Exit by exit.");
+				printf("\nExit by exit. Bye\n");
 				exit(EXIT_SUCCESS);
 				break;
 			default:
@@ -51,6 +51,7 @@ void exec_func(enum builtin_func func, int argc, char* argv[]){
 				break;
 		}
 	}else{
+		printf("bnsh: %s: Wrong number of arguments.\n", func_name[func]);
 		//TODO argument error.
 	}
 }

@@ -4,7 +4,7 @@
 #include<string.h>
 
 void parse_command(char* line, command_t* head){
-	command_t *node = head; 
+	command_t *node = head;
 	char *token;
 	int pos = 0;
 
@@ -15,7 +15,7 @@ void parse_command(char* line, command_t* head){
 		char delim = is_delim(token);
 
 		if (delim_required && delim < 0) {
-			//TODO notice error, in this form? 
+			//TODO notice error, in this form?
 			//perror("Syntax error.\n");
 			exit(EXIT_FAILURE);
 		}

@@ -1,5 +1,5 @@
-#ifndef BUILTIN_H
-#define BUILTIN_H
+#ifndef PARSER_H
+#define PARSER_H
 
 // ARGS
 #define BUF_ARGS_SIZE 1024
@@ -18,6 +18,12 @@ typedef struct command_struct{
 	struct command_struct* next;
 } command_t;
 
+/*
+ * NOTA: El parser no detecta los caracteres especiales (|, <, >, & y ;)
+ *  cuando no se escribe separado por espacios. Ejemplo:
+ *  echo hola ; echo chau //CORRECTO: hola\nchau
+ *  echo hola; echo chau //RESULTADO: hola; echo chau
+ */
 void parse_command(char*, command_t*);
 /* Linked List init */
 command_t* new_node(void);

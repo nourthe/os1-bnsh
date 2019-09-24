@@ -2,3 +2,5 @@
 *.o
 #Executables
 bnsh
+#ctags (Vim and others)
+tags
