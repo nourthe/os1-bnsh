@@ -7,6 +7,7 @@
 const char* func_name[FUNC_MAX] = {
 	"exit",
 	"cd",
+	//TODO clear
 };
 
 int get_func_argument_count(enum builtin_func func){
@@ -17,6 +18,7 @@ int get_func_argument_count(enum builtin_func func){
 		case CD:
 			return 1;
 			break;
+		//TODO clear
 		default:
 			//TODO error notice
 			break;
@@ -46,6 +48,7 @@ void exec_func(enum builtin_func func, int argc, char* argv[]){
 				printf("\nExit by exit. Bye\n");
 				exit(EXIT_SUCCESS);
 				break;
+			//TODO clear
 			default:
 				//TODO error notice
 				break;

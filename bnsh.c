@@ -25,6 +25,7 @@ void cancel();
 
 int main(int argc, char* argv[]){
 	signal(SIGINT, cancel);
+	//TODO Si recibe un archivo como argumento, ejecutar cada linea de él.
 	int keep = 1;
 	/* Main Loop */
 	while(keep){
@@ -92,7 +93,7 @@ int read_line(char* buf, int buf_size){
 	return 0;
 }
 void cancel(){
-	//TODO realizar un continue en el main-loop
+	//TODO realizar un "continue" en el main-loop
 	/*char prompt[5000];
 	get_prompt(prompt);
 	printf("\n%s", prompt);*/
