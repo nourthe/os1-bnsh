@@ -45,7 +45,7 @@ void exec_func(enum builtin_func func, int argc, char* argv[]){
 				//
 				break;
 			case EXIT:
-				printf("\nExit by exit. Bye\n");
+				printf("Exit by exit. Bye\n");
 				exit(EXIT_SUCCESS);
 				break;
 			//TODO clear
