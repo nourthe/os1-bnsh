@@ -13,6 +13,9 @@
 #include"parser.h"
 #include"builtin.h"
 
+#ifndef VERSION
+#define VERSION "unknown"
+#endif
 
 #define COMMAND_LINE_BUFFER_SIZE 2024
 
