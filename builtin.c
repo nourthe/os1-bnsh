@@ -8,6 +8,7 @@ const char* func_name[FUNC_MAX] = {
 	"exit",
 	"quit",
 	"cd",
+	"echo",
 	"help",
 	//TODO clear
 };
@@ -20,6 +21,7 @@ int get_func_argument_count(enum builtin_func func){
 			return 0;
 			break;
 		case CD:
+		case ECHO:
 			return 1;
 			break;
 		//TODO clear
@@ -47,6 +49,9 @@ void exec_func(enum builtin_func func, int argc, char* argv[]){
 				//TODO CHANGE DIRECTORY
 				printf("to-do: do change directory to: %s.\n", argv[1]);
 				//
+				break;
+			case ECHO:
+				printf("%s\n", argv[1]);
 				break;
 			case QUIT:
 			case EXIT:

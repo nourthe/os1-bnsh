@@ -5,7 +5,8 @@ enum builtin_func{
 	EXIT,
 	QUIT,
 	CD,
-  HELP,
+	ECHO,
+	HELP,
 	//TODO clear
 	FUNC_MAX
 };
