@@ -3,6 +3,7 @@
 
 enum builtin_func{
 	EXIT,
+	QUIT,
 	CD,
   HELP,
 	//TODO clear
