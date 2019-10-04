@@ -46,7 +46,7 @@ int main(int argc, char* argv[]){
   int show_help = 0;
   int show_version = 0;
   int error = 1;
-  while ((c = getopt_long(argc, argv, "v", long_opt, &opt_ind))!=-1){
+  while ((c = getopt_long(argc, argv, "vc:", long_opt, &opt_ind))!=-1){
     switch(c){
     case 1:
       show_help = 1;
@@ -54,32 +54,38 @@ int main(int argc, char* argv[]){
     case 'v':
       show_version = 1;
       break;
+    case 'c':
+      break;
     default:
       /* Params error */
       /* show_help = 1; */
       /* error = 1; */
       break;
-    }
-    if(show_version && error==0 ){
-      print_version();
-      return 0;
-    }
-    if(show_help){
-      print_usage();
-      return error;
+   
+      if(show_version && error==0 ){
+        print_version();
+        return 0;
+      }
+      if(show_help){
+        print_usage();
+        return error;
+      }
     }
   }
-    //TODO Si recibe un archivo como argumento, ejecutar cada linea de él.
+  //TODO Si recibe un archivo como argumento, ejecutar cada linea de él.
 
-    /* Main Loop */
-    main_loop();
-    return 0;
+  /* Main Loop */
+  main_loop();
+  return 0;
 }
 void print_usage(){
   printf("Usage: bnsh [option] | [shell file location]\n");
   printf("Opciones largas:\n");
   printf("\t--help\n");
   printf("\t--version:\n");
+  printf("\t-c orden\t\t(solo invocación):\n");
+  printf("\n");
+  printf("Teclee `bash -c help` para ver las órdenes internas de la Shell.\n");
 }
 
 void print_version(){

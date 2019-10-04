@@ -4,6 +4,7 @@
 enum builtin_func{
 	EXIT,
 	CD,
+  HELP,
 	//TODO clear
 	FUNC_MAX
 };

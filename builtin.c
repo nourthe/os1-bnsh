@@ -7,12 +7,14 @@
 const char* func_name[FUNC_MAX] = {
 	"exit",
 	"cd",
+  "help",
 	//TODO clear
 };
 
 int get_func_argument_count(enum builtin_func func){
 	switch(func){
 		case EXIT:
+    case HELP:
 			return 0;
 			break;
 		case CD:
@@ -48,6 +50,12 @@ void exec_func(enum builtin_func func, int argc, char* argv[]){
 				printf("Exit by exit. Bye\n");
 				exit(EXIT_SUCCESS);
 				break;
+      case HELP:
+        printf("Estas ordenes de Shell están definidas internamente.\n");
+        printf(" cd [dir]     \t\t\t Change working directory\n");
+        printf(" help         \t\t\t Show this help message\n");
+        printf(" exit         \t\t\t Finish the shell\n");
+        break;
 			//TODO clear
 			default:
 				//TODO error notice
