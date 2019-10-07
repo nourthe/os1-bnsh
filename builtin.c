@@ -10,13 +10,14 @@ const char* func_name[FUNC_MAX] = {
 	"cd",
 	"echo",
 	"help",
-	//TODO clear
+	"clear"
 };
 
 int get_func_argument_count(enum builtin_func func){
 	switch(func){
 		case EXIT:
 		case QUIT:
+		case CLEAR:
 		case HELP:
 			return 0;
 			break;
@@ -24,7 +25,6 @@ int get_func_argument_count(enum builtin_func func){
 		case ECHO:
 			return 1;
 			break;
-		//TODO clear
 		default:
 			//TODO error notice
 			break;
@@ -64,7 +64,9 @@ void exec_func(enum builtin_func func, int argc, char* argv[]){
 				printf(" help         \t\t\t Show this help message\n");
 				printf(" exit         \t\t\t Finish the shell\n");
 				break;
-				//TODO clear
+			case CLEAR:
+				printf("\033[H\033[J");
+				break;
 			default:
 				//TODO error notice
 				break;

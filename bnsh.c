@@ -17,7 +17,7 @@
 #define VERSION "unknown"
 #endif
 
-#define COMMAND_LINE_BUFFER_SIZE 2024
+#define COMMAND_LINE_BUFFER_SIZE 10000
 
 #define ONLY_A_NEW_LINE "ONLY_A_NEW_LINE"
 
@@ -29,8 +29,8 @@
 int main_loop(void);
 void print_version(void);
 void print_usage(void);
-void get_prompt(char* buffer);
-int read_line(char* buffer, int buf_size);
+void print_prompt();
+void read_line(char *buffer, size_t buf_size); 
 void cancel();
 void invoke(char*, char**);
 
@@ -96,11 +96,13 @@ int main_loop(){
   int keep = 1;
   while(keep){
     char prompt[5000];
-    get_prompt(prompt);
-    printf("%s", prompt);
+    print_prompt(prompt,5000);
 
     char line[COMMAND_LINE_BUFFER_SIZE];
+
     read_line(line, COMMAND_LINE_BUFFER_SIZE);
+
+    // If user had no input
     if(strcmp(line, ONLY_A_NEW_LINE)== 0){
       continue;
     }
@@ -195,7 +197,11 @@ int main_loop(){
   }
   return keep;
 }
-void get_prompt(char* buffer){
+
+/**
+ * Prints custom shell prompt in buffer
+*/
+void print_prompt(){
   char cwd[PATH_MAX];
   if (getcwd(cwd, sizeof(cwd)) == NULL) {
     perror("Can't read current directory...");
@@ -205,8 +211,7 @@ void get_prompt(char* buffer){
   char host[BUF_ARGS_SIZE];
   gethostname(host, BUF_ARGS_SIZE);
 
-  sprintf(buffer,
-          "%s%s@%s %s%s%s $ ",
+  printf("%s%s@%s %s%s%s $ ",
           COLOR_BLUE,
           user,
           host,
@@ -215,31 +220,30 @@ void get_prompt(char* buffer){
           COLOR_RESET
           );
 }
-int read_line(char* buf, int buf_size){
-  char *buffer;
-  size_t bufsize = 32;
+/**
+ * Locks the thread waiting for user input
+ * then stores it in buffer
+ * @param buffer the array to store user input
+ * @param buf_size the size of the buffer
+*/
+void read_line(char* buffer, size_t buf_size) {
   size_t characters;
-  buffer = (char *)malloc(bufsize * sizeof(char));
   if( buffer == NULL) {
     perror("Unable to allocate buffer");
     exit(1);
   }
 
-  characters = getline(&buffer,&bufsize,stdin);
+  characters = getline(&buffer,&buf_size,stdin);
   if(characters < 1){ /*TODO notice error*/ }
   else if(characters == 1){
     //TODO better solution.
-    strcpy(buf, ONLY_A_NEW_LINE);
+    strcpy(buffer, ONLY_A_NEW_LINE);
   }
-  else{ strcpy(buf, buffer); }
-
-  //TODO Ya puede volver a retornar void
-  return 0;
 }
 void cancel(){
   //TODO realizar un "continue" en el main-loop
   /*char prompt[5000];
-    get_prompt(prompt);
+    print_prompt(prompt);
     printf("\n%s", prompt);*/
 
   printf("\nExit by Ctrl-C.\n");

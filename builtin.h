@@ -7,7 +7,7 @@ enum builtin_func{
 	CD,
 	ECHO,
 	HELP,
-	//TODO clear
+	CLEAR,
 	FUNC_MAX
 };
 
