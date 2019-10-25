@@ -30,6 +30,8 @@ void parse_command(char* line, command_t* head){
 
 		if (delim < 0) {
 			// get size of token
+			// snprintf devuelve el tamaño del formateo incluso aunque se pase del limite
+			// por eso se usa como 2 primeros argumentos 0
 			size_t sz_token = snprintf(NULL, 0, "%s", token);
 			// alloc memory to store it
 			node->argv[pos] = (char *)malloc((sz_token + 1) * sizeof(char));
